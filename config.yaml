@@ -1,0 +1,32 @@
+name: n8n
+version: 1.0.0
+slug: n8n
+description: n8n is an extendable workflow automation tool.
+startup: services
+boot: auto
+ports:
+  5678/tcp: 5678
+schema:
+  type: object
+  properties:
+    N8N_BASIC_AUTH_ACTIVE:
+      type: boolean
+      default: false
+      title: Enable Basic Auth
+    N8N_BASIC_AUTH_USER:
+      type: string
+      default: ""
+      title: Basic Auth Username
+    N8N_BASIC_AUTH_PASSWORD:
+      type: string
+      default: ""
+      title: Basic Auth Password
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+map:
+  - config:rw
+  - ssl
+  - share
