@@ -1,0 +1,15 @@
+---
+configuration:
+  timezone:
+    name: Timezone
+    description: ตั้งค่าเขตเวลาสำหรับ n8n (เช่น Asia/Bangkok)
+  env_vars_list:
+    name: Environment Variables
+    description: รายการตัวแปรสภาพแวดล้อมในรูปแบบ KEY:VALUE (เช่น NODE_FUNCTION_ALLOW_EXTERNAL:lodash,moment)
+  cmd_line_args:
+    name: Command Line Arguments
+    description: อาร์กิวเมนต์บรรทัดคำสั่งเพิ่มเติมที่จะส่งไปยัง n8n เมื่อเริ่มต้น (ไม่บังคับ)
+
+network:
+  5678/tcp: พอร์ตสำหรับการรับส่งข้อมูล n8n ทั้งหมด โดยปกติจะไม่เปิดเผย เนื่องจาก Home Assistant Ingress มีความปลอดภัยมากกว่า คุณอาจเปิดพอร์ตนี้หากต้องการข้ามการใช้ Ingress (ไม่แนะนำด้วยเหตุผลด้านความปลอดภัย)
+  8081/tcp: พอร์ตสำหรับการเรียกใช้ webhook และ API ใช้เพื่อให้สามารถทำงานภายใต้ Home Assistant Ingress ในขณะที่ยังอนุญาตให้ช่องทางการสื่อสารสาธารณะบางส่วนทำงานได้
