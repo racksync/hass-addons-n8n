@@ -13,7 +13,7 @@ Follow these steps to get the add-on installed on your system:
 
 # Configuration
 ```yaml
-timezone: Europe/Berlin
+timezone: Asia/Bangkok
 env_vars_list: []
 cmd_line_args: ""
 ```
