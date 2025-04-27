@@ -54,14 +54,6 @@ env_vars_list:
   - "WEBHOOK_URL: https://your-tunnel-url.com"
 ```
 
-Common environment variables:
-| Variable | Purpose | Example |
-|----------|---------|---------|
-| `TIMEZONE` | Set your local timezone | `TIMEZONE: Asia/Bangkok` |
-| `N8N_HOST` | n8n instance hostname | `N8N_HOST: localhost` |
-| `WEBHOOK_URL` | External webhook access | `WEBHOOK_URL: https://your-tunnel.com` |
-| `NODE_FUNCTION_ALLOW_EXTERNAL` | Allow external npm packages | `NODE_FUNCTION_ALLOW_EXTERNAL: moment,lodash` |
-| `EXTERNAL_URL` | Nabu Casa remote URL | `EXTERNAL_URL: https://your-nabu-casa.com` |
 
 [View all available environment variables](https://docs.n8n.io/hosting/environment-variables/environment-variables/)
 
@@ -77,9 +69,22 @@ Multiple packages should be comma-separated without spaces.
 ## Network Configuration
 
 ### Webhooks and API Access
-- Webhook/API traffic runs on port 7123
-- For external access, use [Cloudflared addon](https://github.com/brenner-tobias/addon-cloudflared)
-- Set `WEBHOOK_URL` to your tunnel URL
+For secure external access to webhooks and the n8n API, we strongly recommend using Cloudflared:
+
+1. Install [Cloudflared addon](https://github.com/racksync/hass-addons-suite)
+2. Create a tunnel for port 7123 (webhook/API port)
+3. Add the tunnel URL to your configuration:
+```yaml
+env_vars_list:
+  - "WEBHOOK_URL: https://your-tunnel.cloudflare.com"
+```
+
+Benefits of using Cloudflared:
+- 🔒 Secure HTTPS endpoint
+- 🌍 Global CDN access
+- 🛡️ DDoS protection
+- 🔑 Zero trust security
+- 🚫 No port forwarding needed
 
 ### Remote Access
 - For Nabu Casa: Set `EXTERNAL_URL` to your remote URL
@@ -90,7 +95,10 @@ Multiple packages should be comma-separated without spaces.
 1. Install the addon
 2. Start it from the Home Assistant interface
 3. Access n8n through the addon's Web UI
-4. Begin creating your first workflow!
+4. Set up Cloudflared tunnel for webhooks (recommended)
+5. Begin creating your first workflow!
+
+💡 **Pro Tip**: Set up the Cloudflared tunnel before creating workflows that use webhooks or external triggers. This ensures your workflows will have secure, reliable external access from the start.
 
 ## Resources
 
