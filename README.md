@@ -1,89 +1,111 @@
-# What is n8n?
+# n8n - Home Assistant Add-on
 
-n8n (pronounced n-eight-n) helps you to interconnect every app with an API in the world with each other to share and manipulate its data without a single line of code. It is an easy to use, user-friendly and highly customizable service, which uses an intuitive user interface for you to design your unique workflows very fast. Hosted on your server and not based in the cloud, it keeps your sensible data very secure in your own trusted database.
+`n8n` (pronounced n-eight-n) a.k.a. `Nodemation` is a powerful workflow automation platform that lets you connect any app with an API without coding. It features an intuitive visual interface for creating workflows and runs securely on your own server.
+
+## Available Versions
+
+| Version | Description | Best For |
+|---------|-------------|----------|
+| `n8n` | Stable release with thoroughly tested features | Production use, stable environments |
+| `n8n-nightly` | Cutting-edge build with latest features | Testing, development, early adopters |
+
+Choose the version that best suits your needs:
+- Use `n8n` for reliable, production-ready automation
+- Use `n8n-nightly` to try out the latest features and improvements
+
+## Why n8n on Home Assistant?
+
+| Advantage | Description |
+|-----------|-------------|
+| 🔒 Security | Runs locally on your server, keeping sensitive data secure |
+| 🏠 Home Integration | Direct integration with Home Assistant for smart home automation |
+| 🔌 Low-Code Solution | Visual workflow builder for connecting apps and services |
+| 🌐 API Freedom | Connect to any service with an API endpoint |
+| 🚀 Real-time Processing | Execute workflows flowlessly with webhook triggers |
+| 🛡️ Authentication | Protected by Home Assistant's authentication and ingress system |
 
 # Installation
-Follow these steps to get the add-on installed on your system:
 
-**Important:** Make sure you've added this addon repository to your Home Assistant addon library: https://github.com/racksync/hass-addons-n8n
-
-1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
-2. Find the "hass-addons-n8n" add-on and click it.
-3. Click on the "INSTALL" button.
+1. Add our repository to Home Assistant: `https://github.com/racksync/hass-addons-n8n`
+2. Navigate to **Supervisor** -> **Add-on Store**
+3. Find either:
+   - `n8n` for the stable version
+   - `n8n-nightly` for the cutting-edge version
+4. Click "INSTALL" on your chosen version
 
 # Configuration
+
 ```yaml
 timezone: Asia/Bangkok
 env_vars_list: []
 cmd_line_args: ""
 ```
 
-## Option: `env_vars_list` (required)
-List of the n8n environment variables. You can add as many environment variables as you want to the list through the UI. The format is the following:
+## Required Settings
 
-`SOME_ENVIRONMENT_VARIABLE: some-value` (the regular expression is `^[A-Z_0-9]+: .*$` )
-
-All the available environment variables are available here : <https://docs.n8n.io/hosting/environment-variables/environment-variables/>
-
-## Option: `cmd_line_args` (optional)
-The command line to start n8n. If you want to use a custom command line, you can use this variable.
-
-## Installing external packages
-In n8n you can add external node modules by setting the `NODE_FUNCTION_ALLOW_EXTERNAL` environment variable with the list of npm packages you need.
-
-For example, to install the `lodash` and the `moment` packages, in the UI, set the `env_vars_list` variable to:
-
-```txt
-NODE_FUNCTION_ALLOW_EXTERNAL: lodash,moment
+### `env_vars_list`
+Add environment variables as a list in the addon configuration. Each variable should be on a new line following this format:
+```yaml
+env_vars_list:
+  - "TIMEZONE: Asia/Bangkok"
+  - "N8N_HOST: localhost"
+  - "N8N_PORT: 5678"
+  - "NODE_FUNCTION_ALLOW_EXTERNAL: moment,lodash"
+  - "WEBHOOK_URL: https://your-tunnel-url.com"
 ```
 
-## Setting up external access
-The addon is presented via a [Home Assistant Ingress](https://www.home-assistant.io/blog/2019/04/15/hassio-ingress/) for additional security. 
+Common environment variables:
+| Variable | Purpose | Example |
+|----------|---------|---------|
+| `TIMEZONE` | Set your local timezone | `TIMEZONE: Asia/Bangkok` |
+| `N8N_HOST` | n8n instance hostname | `N8N_HOST: localhost` |
+| `WEBHOOK_URL` | External webhook access | `WEBHOOK_URL: https://your-tunnel.com` |
+| `NODE_FUNCTION_ALLOW_EXTERNAL` | Allow external npm packages | `NODE_FUNCTION_ALLOW_EXTERNAL: moment,lodash` |
+| `EXTERNAL_URL` | Nabu Casa remote URL | `EXTERNAL_URL: https://your-nabu-casa.com` |
 
-This means that in addition to n8n's credentials, n8n can't be accessed without being authenticated with Home Assistant as well, even when accessing it remotely.
+[View all available environment variables](https://docs.n8n.io/hosting/environment-variables/environment-variables/)
 
-### Nabu Casa remote URL
-If you use Nabu Casa remote URL, the addon can't fetch your Nabu Casa remote URL programmatically, in that case, you need to set the `EXTERNAL_URL` environment variable to your Nabu Casa remote URL for things like OAuth2 credentials to work properly (setting the right redirect URLs).
+### External Packages
+To use external npm packages, add them to `env_vars_list`:
+```yaml
+env_vars_list:
+  - "NODE_FUNCTION_ALLOW_EXTERNAL: axios,moment,lodash"
+```
 
-### Manual external URL
-If you are using a manual external URL, Ingress traffic is not relayed via this in a safe manner. In that case, you need to expose port `5678` of the container to a certain port (for instance, `5678`) on Home Assistant, under the "Network" section of the configuration tab of the addon.
+Multiple packages should be comma-separated without spaces.
 
-### Webhooks, triggers and n8n API
-Webhooks, triggers and the n8n API can't go via an Ingress, since having Home Assistant authentication on top of it would break the webhook (they need to be publically accessible and unauthenticated). 
+## Network Configuration
 
-For this reason, the addon exposes all webhook or API traffic on port `8081`.
+### Webhooks and API Access
+- Webhook/API traffic runs on port 7123
+- For external access, use [Cloudflared addon](https://github.com/brenner-tobias/addon-cloudflared)
+- Set `WEBHOOK_URL` to your tunnel URL
 
-For the n8n API, webhooks and some webhook-based triggers to work properly, you need to open up a tunnel for port `8081` to the internet via the [Cloudflared addon](https://github.com/brenner-tobias/addon-cloudflared) or something similar. 
+### Remote Access
+- For Nabu Casa: Set `EXTERNAL_URL` to your remote URL
+- For manual setup: Configure port 5678 in the Network section
 
-When done, set the `WEBHOOK_URL` environment variable to the URL of the tunnel.
+# Quick Start
 
-### Bypassing Home Assistant Ingress entirely (not recommended)
-If you want to, you can expose n8n without requiring to go through the Ingress. This is done in the "ports" section of the "configuration" tab of the addon, for port `5678`. Note that you need to enable "hidden port bindings" for that port to show up. It is not exposed by default.
+1. Install the addon
+2. Start it from the Home Assistant interface
+3. Access n8n through the addon's Web UI
+4. Begin creating your first workflow!
 
-# How to use it?
-Just start the addon and head to the addon's web UI.
+## Resources
 
-## Useful ressources
+- [n8n Documentation](https://docs.n8n.io)
+- [Workflow Examples](https://n8n.io/workflows)
+- [Available Integrations](https://n8n.io/integrations)
 
-### n8n documentation
-<https://docs.n8n.io>
-<https://docs.n8n.io/getting-started/tutorials.html>
+## Support
 
-### Community public workflows
-<https://n8n.io/workflows>
-
-### Available integrations
-<https://n8n.io/integrations>
+Having issues? [Open an issue](https://github.com/racksync/hass-addons-n8n) on our GitHub repository.
 
 ## License
-This addon is published under the Apache 2 license. Original author of the addon's bundled software is n8n.
 
-# Troubleshooting
-Got questions?
+This addon is published under the Apache 2 license. Original software by n8n.
 
-You can open an issue on GitHub.
+## Troubleshooting
 
-Repository: <https://github.com/racksync/hass-addons-n8n>
-
-## `401: Unauthorized` in popup-window when trying to set up OAuth-based credential
-This can happen depending on which browser you are using. To work around it, copy the URL of the popup window and paste it into a new tab in the main window. Then the authorization will complete.
+**OAuth Issues**: If you encounter a `401: Unauthorized` in the OAuth popup window, copy the URL to a new tab in your main window to complete the authorization.
