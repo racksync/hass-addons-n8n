@@ -2,10 +2,10 @@
 configuration:
   timezone:
     name: Timezone
-    description: Set the timezone for n8n (e.g. Asia/Bangkok)
+    description: Timezone for n8n instance (e.g. Asia/Bangkok)
   env_vars_list:
     name: Environment Variables
-    description: List of environment variables in format KEY:VALUE (e.g., NODE_FUNCTION_ALLOW_EXTERNAL:lodash,moment)
+    description: List of .env variables in format KEY:VALUE (e.g., N8N_LOG_LEVEL:info)
   cmd_line_args:
     name: Command Line Arguments
     description: Additional command line arguments to pass to n8n when starting (optional)

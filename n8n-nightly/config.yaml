@@ -20,16 +20,16 @@ startup: application
 boot: auto
 icon: icon.png
 logo: icon.png
-webui: "http://[HOST]:[PORT:5690]"
+webui: "http://[HOST]:[PORT:8765]"
 map:
   - ssl:ro
   - backup:rw
   - share:rw
   - media:rw
   - config:ro
-watchdog: "http://[HOST]:[PORT:5690]"
+watchdog: "http://[HOST]:[PORT:8765]"
 ingress: true
-ingress_port: 5690
+ingress_port: 8765
 ports:
   "5678/tcp": null
   "7123/tcp": null
