@@ -1,12 +1,17 @@
-# What is n8n?
+# n8n - Home Assistant Add-on
 
-n8n (pronounced n-eight-n) helps you to interconnect every app with an API in the world with each other to share and manipulate its data without a single line of code. It is an easy to use, user-friendly and highly customizable service, which uses an intuitive user interface for you to design your unique workflows very fast. Hosted on your server and not based in the cloud, it keeps your sensible data very secure in your own trusted database.
+`n8n` (pronounced n-eight-n) a.k.a. `Nodemation` is a powerful workflow automation platform that lets you connect any app with an API without coding. It features an intuitive visual interface for creating workflows and runs securely on your own server.
 
-# Installation
-Follow these steps to get the add-on installed on your system:
+## Version?
+You are now using `n8n-nightly` The Cutting-edge build with latest features, Testing, development, early adopters.
 
-**Important:** Make sure you've added this addon repository to your Home Assistant addon library: https://github.com/racksync/hass-addons-n8n
+## Why n8n on Home Assistant?
 
-1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
-2. Find the "hass-n8n" add-on and click it.
-3. Click on the "INSTALL" button.
+| Advantage | Description |
+|-----------|-------------|
+| 🔒 Security | Runs locally on your server, keeping sensitive data secure |
+| 🏠 Home Integration | Direct integration with Home Assistant for smart home automation |
+| 🔌 Low-Code Solution | Visual workflow builder for connecting apps and services |
+| 🌐 API Freedom | Connect to any service with an API endpoint |
+| 🚀 Real-time Processing | Execute workflows flowlessly with webhook triggers |
+| 🛡️ Authentication | Protected by Home Assistant's authentication and ingress system |
