@@ -34,10 +34,10 @@ ports:
   "5678/tcp": null
   "7123/tcp": 7123
 ports_description:
-  "5678/tcp": The port for all n8n traffic. Normally not exposed, as Home Assistant Ingress is more secure and is recommended. You may expose this port if you want to bypass the Ingress (not recommended for security reasons). See the documentation for more information.
-  "7123/tcp": The port for n8n webhook and API-related traffic. Use this to allow running under Home Assistant Ingress while still allowing certain public communication channels to go through and function.
+  "5678/tcp": The port for all n8n traffic. Not exposed by default, 
+  "7123/tcp": For webhook and API-related traffic.
 options:
-  timezone: Europe/Berlin
+  timezone: Asia/Bangkok
   env_vars_list: []
   cmd_line_args: ""
 schema:
