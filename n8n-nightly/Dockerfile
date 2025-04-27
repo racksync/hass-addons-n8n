@@ -25,7 +25,7 @@ COPY entrypoint-n8n.sh /app/entrypoint-n8n.sh
 COPY entrypoint-nginx.sh /app/entrypoint-nginx.sh
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY supervisord.conf /etc/supervisord.conf
+COPY supervised.conf /etc/supervised.conf
 
 
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervised.conf"]
