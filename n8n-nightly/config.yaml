@@ -1,7 +1,7 @@
 name: n8n nightly
 version: 2025.5.1
 slug: hass-addons-n8n-nightly 
-description: Run n8n instance on Home Assistant
+description: Cutting edge run n8n nightly instance on Home Assistant
 url: https://github.com/racksync/hass-addons-n8n
 hassio_api: true
 hassio_role: default
@@ -32,10 +32,10 @@ ingress: true
 ingress_port: 5690
 ports:
   "5678/tcp": null
-  "8081/tcp": null
+  "7123/tcp": null
 ports_description:
   "5678/tcp": The port for all n8n traffic. Not exposed by default, 
-  "8081/tcp": For webhook and API-related traffic.
+  "7123/tcp": For webhook and API-related traffic.
 options:
   timezone: Asia/Bangkok
   env_vars_list: []

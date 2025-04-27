@@ -1,7 +1,7 @@
 name: n8n
 version: 2025.5.1
 slug: hass-addons-n8n
-description: Self host your n8n instance
+description: Run n8n instance on Home Assistant
 url: https://github.com/racksync/hass-addons-n8n
 hassio_api: true
 hassio_role: default
@@ -20,24 +20,24 @@ startup: application
 boot: auto
 icon: icon.png
 logo: icon.png
-webui: "http://[HOST]:[PORT:5690]"
+webui: "http://[HOST]:[PORT:8765]/"
 map:
   - ssl:ro
   - backup:rw
   - share:rw
   - media:rw
   - config:ro
-watchdog: "http://[HOST]:[PORT:5690]"
+watchdog: "http://[HOST]:[PORT:8765]"
 ingress: true
-ingress_port: 5690
+ingress_port: 8765
 ports:
   "5678/tcp": null
-  "8081/tcp": 8081
+  "7123/tcp": 7123
 ports_description:
   "5678/tcp": The port for all n8n traffic. Normally not exposed, as Home Assistant Ingress is more secure and is recommended. You may expose this port if you want to bypass the Ingress (not recommended for security reasons). See the documentation for more information.
-  "8081/tcp": The port for n8n webhook and API-related traffic. Use this to allow running under Home Assistant Ingress while still allowing certain public communication channels to go through and function. See the documentation for more information.
+  "7123/tcp": The port for n8n webhook and API-related traffic. Use this to allow running under Home Assistant Ingress while still allowing certain public communication channels to go through and function.
 options:
-  timezone: Asia/Bangkok
+  timezone: Europe/Berlin
   env_vars_list: []
   cmd_line_args: ""
 schema:

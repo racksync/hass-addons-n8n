@@ -12,4 +12,4 @@ configuration:
 
 network:
   5678/tcp: The port for all n8n traffic. Normally not exposed, as Home Assistant Ingress is more secure and is recommended. You may expose this port if you want to bypass the Ingress (not recommended for security reasons).
-  8081/tcp: The port for n8n webhook and API-related traffic. Use this to allow running under Home Assistant Ingress while still allowing certain public communication channels to go through and function.
+  7123/tcp: The port for n8n webhook and API-related traffic. Use this to allow running under Home Assistant Ingress while still allowing certain public communication channels to go through and function.

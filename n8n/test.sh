@@ -7,12 +7,12 @@ docker build \
     .
 
 # remove existing container
-docker rm -f hass-addons-n8n
+docker rm -f hass-n8n
 
 # run the container
 docker run \
     -p 8765:8765 \
     -p 5678:5678 \
-    -p 8081:8081 \
-    --name hass-addons-n8n \
-    hass-addons-n8n
+    -p 7123:7123 \
+    --name hass-n8n \
+    hass-n8n
