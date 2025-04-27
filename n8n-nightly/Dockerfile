@@ -11,18 +11,21 @@ RUN apk add --no-cache --update \
     curl \
     nginx \
     supervisor \
-    envsubst
+    envsubst \
+    git
+
 WORKDIR /data
-COPY n8n-entrypoint.sh /app/n8n-entrypoint.sh
+COPY entrypoint-n8n.sh /app/entrypoint-n8n.sh
 
 RUN mkdir -p /run/nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf.template
 
-COPY n8n-entrypoint.sh /app/n8n-entrypoint.sh
-COPY nginx-entrypoint.sh /app/nginx-entrypoint.sh
+COPY entrypoint-n8n.sh /app/entrypoint-n8n.sh
+COPY entrypoint-nginx.sh /app/entrypoint-nginx.sh
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisord.conf
+
 
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
