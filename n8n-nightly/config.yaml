@@ -31,7 +31,7 @@ watchdog: "http://[HOST]:[PORT:8765]"
 ingress: true
 ingress_port: 8765
 ports:
-  "5678/tcp": null
+  "5678/tcp": 5678
   "7123/tcp": 7123
 ports_description:
   "5678/tcp": The port for all n8n traffic. Not exposed by default, 
