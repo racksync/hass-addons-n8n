@@ -1,4 +1,4 @@
 # Release 2025.5.1
 
-## Genesis 🚀
+## Genesis Seed 🚀
 - initial release
