@@ -117,3 +117,55 @@ This addon is published under the Apache 2 license. Original software by n8n.
 ## Troubleshooting
 
 **OAuth Issues**: If you encounter a `401: Unauthorized` in the OAuth popup window, copy the URL to a new tab in your main window to complete the authorization.
+
+# RACKSYNC CO., LTD
+
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/86172519?s=200&v=4" alt="RACKSYNC Logo" width="200"/>
+  
+  **Innovative Cloud & Infrastructure Solutions**
+</div>
+
+## Technologies We Work With
+
+<div align="center">
+  
+  ![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
+  ![GCP](https://img.shields.io/badge/-Google_Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white)
+  ![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
+  ![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+  ![Terraform](https://img.shields.io/badge/-Terraform-623CE4?style=flat-square&logo=terraform&logoColor=white)
+  ![Ansible](https://img.shields.io/badge/-Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white)
+  ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white)
+  ![Prometheus](https://img.shields.io/badge/-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white)
+  ![Grafana](https://img.shields.io/badge/-Grafana-F46800?style=flat-square&logo=grafana&logoColor=white)
+  
+</div>
+
+## About Us
+
+RACKSYNC CO., LTD is a technology company specializing in cloud infrastructure, DevOps solutions, and system integrations. We empower businesses through innovative technology implementations and managed services tailored to meet specific operational needs.
+
+### Home Automation Solutions
+
+RACKSYNC provides cutting-edge home automation solutions that transform ordinary homes into smart, efficient living spaces:
+
+- **Smart Home Integration**: Seamlessly connect and control all your smart devices through unified platforms
+- **Voice-Controlled Systems**: Implement voice assistants and controls throughout your living space
+- **Energy Management**: Optimize energy consumption with intelligent monitoring and automated controls
+- **Security & Surveillance**: Advanced security systems with remote monitoring and alerts
+- **Custom Automation Scripts**: Tailor-made automation workflows for your specific lifestyle needs
+- **IoT Device Management**: Professional setup and management of Internet of Things ecosystems
+
+## Connect With Us
+
+- **Website**: [www.racksync.com](https://www.racksync.com)
+- **GitHub**: [@racksync](https://github.com/racksync)
+- **Email**: [contact@racksync.com](mailto:contact@racksync.com)
+- **Location**: Bangkok, Thailand
+
+---
+
+<div align="center">
+  <small>© 2007-2025 RACKSYNC CO., LTD. All Rights Reserved.</small>
+</div>
