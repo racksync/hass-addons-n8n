@@ -16,3 +16,13 @@ You are now using `n8n nightly` The Cutting-edge build with latest features, Tes
 | 🌐 API Freedom | Connect to any service with an API endpoint |
 | 🚀 Real-time Processing | Execute workflows flowlessly with webhook triggers |
 | 🛡️ Authentication | Protected by Home Assistant's authentication and ingress system |
+
+
+# Workflows and Credentials Migration
+
+If you want to pre-load workflows and credentials into n8n when the add-on is started for the first time, simply place your files in the following directories **before starting the add-on**:
+
+- Workflows: `/config/n8n/workflows/`
+- Credentials: `/config/n8n/credentials/`
+
+> Tip: For security, make sure to remove sensitive files from these directories after import if you do not want them to persist in plain text.

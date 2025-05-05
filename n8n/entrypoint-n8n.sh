@@ -96,7 +96,7 @@ echo "WEBHOOK_URL: ${WEBHOOK_URL}"
 ###########
 
 # First-run import logic
-IMPORT_MARKER="/data/.n8n_import_done"
+IMPORT_MARKER="/share/.n8n_import_done"
 CREDENTIALS_DIR="/config/n8n/credentials/"
 WORKFLOWS_DIR="/config/n8n/workflows/"
 

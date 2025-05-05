@@ -23,7 +23,7 @@ logo: icon.png
 webui: "http://[HOST]:[PORT:8765]"
 map:
   - ssl:ro
-  - backup:rw
+  - backup:ro
   - share:rw
   - media:rw
   - config:ro
