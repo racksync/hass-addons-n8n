@@ -24,7 +24,7 @@ webui: "http://[HOST]:[PORT:8765]"
 map:
   - ssl:ro
   - backup:ro
-  - share:rw
+  - share:ro
   - media:rw
   - config:ro
 watchdog: "http://[HOST]:[PORT:8765]"

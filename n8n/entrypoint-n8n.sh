@@ -96,7 +96,7 @@ echo "WEBHOOK_URL: ${WEBHOOK_URL}"
 ###########
 
 # First-run import logic
-IMPORT_MARKER="/share/.n8n_import_done"
+IMPORT_MARKER="/media/.n8n_import_done"
 CREDENTIALS_DIR="/config/n8n/credentials/"
 WORKFLOWS_DIR="/config/n8n/workflows/"
 
@@ -108,7 +108,16 @@ if [ ! -f "$IMPORT_MARKER" ]; then
     echo "Importing credentials from $CREDENTIALS_DIR"
     n8n import:credentials --separate --input="$CREDENTIALS_DIR"
   else
-    echo "No credentials to import."
+    echo "No credentials to import from directory."
+  fi
+
+  # Import single credentials file if it exists
+  SINGLE_CREDS_FILE="/config/n8n/creds.json"
+  if [ -f "$SINGLE_CREDS_FILE" ]; then
+    echo "Importing credentials from $SINGLE_CREDS_FILE"
+    n8n import:credentials --input="$SINGLE_CREDS_FILE"
+  else
+    echo "No single credentials file to import."
   fi
 
   # Import workflows if directory exists and is not empty
@@ -116,7 +125,16 @@ if [ ! -f "$IMPORT_MARKER" ]; then
     echo "Importing workflows from $WORKFLOWS_DIR"
     n8n import:workflow --separate --input="$WORKFLOWS_DIR"
   else
-    echo "No workflows to import."
+    echo "No workflows to import from directory."
+  fi
+
+  # Import single workflows file if it exists
+  SINGLE_WORKFLOWS_FILE="/config/n8n/flows.json"
+  if [ -f "$SINGLE_WORKFLOWS_FILE" ]; then
+    echo "Importing workflows from $SINGLE_WORKFLOWS_FILE"
+    n8n import:workflow --input="$SINGLE_WORKFLOWS_FILE"
+  else
+    echo "No single workflows file to import."
   fi
 
   touch "$IMPORT_MARKER"
