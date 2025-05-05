@@ -95,6 +95,37 @@ echo "WEBHOOK_URL: ${WEBHOOK_URL}"
 ## MAIN  ##
 ###########
 
+# First-run import logic
+IMPORT_MARKER="/data/.n8n_import_done"
+CREDENTIALS_DIR="/config/n8n/credentials/"
+WORKFLOWS_DIR="/config/n8n/workflows/"
+
+if [ ! -f "$IMPORT_MARKER" ]; then
+  echo "First run detected: importing credentials and workflows..."
+
+  # Import credentials if directory exists and is not empty
+  if [ -d "$CREDENTIALS_DIR" ] && [ "$(ls -A "$CREDENTIALS_DIR" 2>/dev/null)" ]; then
+    echo "Importing credentials from $CREDENTIALS_DIR"
+    n8n import:credentials --separate --input="$CREDENTIALS_DIR"
+  else
+    echo "No credentials to import."
+  fi
+
+  # Import workflows if directory exists and is not empty
+  if [ -d "$WORKFLOWS_DIR" ] && [ "$(ls -A "$WORKFLOWS_DIR" 2>/dev/null)" ]; then
+    echo "Importing workflows from $WORKFLOWS_DIR"
+    n8n import:workflow --separate --input="$WORKFLOWS_DIR"
+  else
+    echo "No workflows to import."
+  fi
+
+  touch "$IMPORT_MARKER"
+else
+  echo "Imports already performed, skipping."
+fi
+
+# Run n8n
+
 if [ "$#" -gt 0 ]; then
   # Got started with arguments
   exec n8n "${N8N_CMD_LINE}"
