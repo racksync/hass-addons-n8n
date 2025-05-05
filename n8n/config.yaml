@@ -1,5 +1,5 @@
 name: n8n
-version: 2025.5.1
+version: 2025.5.2
 slug: hass-addons-n8n
 description: Run n8n instance on Home Assistant
 url: https://github.com/racksync/hass-addons-n8n
