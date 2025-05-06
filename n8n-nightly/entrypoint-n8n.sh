@@ -148,24 +148,12 @@ if [ ! -f "$IMPORT_MARKER" ]; then
     echo "No single workflows file to import."
   fi
 
-  # Write import details to marker file in JSON format
-  {
-    echo "{"
-    echo -n "  \"imported_workflows\": ["
-    for i in "${!imported_workflows[@]}"; do
-      printf '\"%s\"' "${imported_workflows[$i]}"
-      [ $i -lt $(( ${#imported_workflows[@]} - 1 )) ] && echo -n ", "
-    done
-    echo "],"
-    echo -n "  \"imported_credentials\": ["
-    for i in "${!imported_credentials[@]}"; do
-      printf '\"%s\"' "${imported_credentials[$i]}"
-      [ $i -lt $(( ${#imported_credentials[@]} - 1 )) ] && echo -n ", "
-    done
-    echo "],"
-    echo "  \"import_date\": \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\""
-    echo "}"
-  } > "$IMPORT_MARKER"
+  # Write import details to marker file in pretty JSON format using jq
+  jq -n \
+    --argjson workflows "$(printf '%s\n' "${imported_workflows[@]}" | jq -R . | jq -s .)" \
+    --argjson credentials "$(printf '%s\n' "${imported_credentials[@]}" | jq -R . | jq -s .)" \
+    --arg date "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" \
+    '{imported_workflows: $workflows, imported_credentials: $credentials, import_date: $date}' > "$IMPORT_MARKER"
 else
   echo "Imports already performed, skipping."
 fi
