@@ -1,6 +1,5 @@
 # n8n Sustainable Use License
 
-Copyright 2024 RACKSYNC
 
 This project is licensed under the n8n Sustainable Use License (SUL), a fair-code license created by n8n in 2022. The SUL applies to all source code in this repository except:
 - Content of branches other than `main` (or `master`)
