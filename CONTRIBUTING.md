@@ -2,9 +2,6 @@
 
 Thank you for your interest in contributing to this project! We welcome contributions from everyone. Please read the following guidelines to help us maintain a welcoming and productive community.
 
-## Code of Conduct
-
-This project follows a [Code of Conduct](CODE_OF_CONDUCT.md) to foster an open and welcoming environment. By participating, you agree to abide by these standards.
 
 ## How to Contribute
 
