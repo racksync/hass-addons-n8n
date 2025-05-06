@@ -2,9 +2,6 @@
 
 *n8n* (pronounced n-eight-n) a.k.a. `Nodemation` is a powerful workflow automation platform that lets you connect any app with an API without coding. It features an intuitive visual interface for creating workflows and runs securely on your own server.
 
-## Version?
-
-You are now using `n8n nightly` The Cutting-edge build with latest features, Testing, development, early adopters.
 
 ## Why n8n on Home Assistant?
 
