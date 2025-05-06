@@ -1,4 +1,6 @@
-# Configuration
+# n8n Configuration
+
+## Default Configuration - Edit in YAML
 
 ```yaml
 timezone: Asia/Bangkok
@@ -6,19 +8,40 @@ env_vars_list: []
 cmd_line_args: ""
 ```
 
-## Required Settings
+## Example of Extra Environment Variables
 
-### `env_vars_list`
 Add environment variables as a list in the addon configuration. Each variable should be on a new line following this format:
+
 ```yaml
 env_vars_list:
-  - "TIMEZONE: Asia/Bangkok"
   - "N8N_HOST: localhost"
   - "N8N_PORT: 5678"
-  - "NODE_FUNCTION_ALLOW_EXTERNAL: moment,lodash"
-  - "WEBHOOK_URL: https://your-tunnel-url.com"
+  - "N8N_PROTOCOL: http"
+  - "WEBHOOK_URL: https://your-tunnel-url.com" 
+  - "N8N_EDITOR_BASE_URL: http://localhost:5678"
+  - "N8N_ENCRYPTION_KEY: your-secret-key"
+  - "NODE_ENV: development" 
+  - "N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true" 
+  - "N8N_SECURE_COOKIE: false" 
+  - "N8N_USER_MANAGEMENT_JWT_SECRET: secret-key"
+  - "N8N_RUNNERS_ENABLED: true" 
+  - "N8N_PERSONALIZATION: false" 
+  - "DB_TYPE: postgresdb"
+  - "DB_POSTGRESDB_HOST: postgres"
+  - "DB_POSTGRESDB_PORT: 5432"
+  - "DB_POSTGRESDB_DATABASE: n8n"
+  - "DB_POSTGRESDB_USER: n8n"
+  - "DB_POSTGRESDB_PASSWORD: n8n"
+  - "N8N_LOG_LEVEL: info" 
+  - "N8N_LOG_OUTPUT: console" 
+  - "N8N_LOG_FILE: /home/node/.n8n/logs/n8n.log" 
+  - "N8N_LOG_FILE_MAX_SIZE: 120mb" 
+  - "N8N_LOG_FILE_MAX_FILES: 10" 
+  - "N8N_LOG_FILE_COMPRESSION: true" 
+  - "N8N_LOG_FILE_ROTATE: true" 
+  - "N8N_LOG_FILE_ROTATE_INTERVAL: 1d" 
+  - "OLLAMA_HOST: host.docker.internal:11434"
 ```
-
 
 [View all available environment variables](https://docs.n8n.io/hosting/environment-variables/environment-variables/)
 
@@ -44,16 +67,15 @@ env_vars_list:
   - "WEBHOOK_URL: https://your-tunnel.cloudflare.com"
 ```
 
-Benefits of using Cloudflared:
-- 🔒 Secure HTTPS endpoint
-- 🌍 Global CDN access
-- 🛡️ DDoS protection
-- 🔑 Zero trust security
-- 🚫 No port forwarding needed
+## Override Default Web Interface 
 
-### Remote Access
-- For Nabu Casa: Set `EXTERNAL_URL` to your remote URL
-- For manual setup: Configure port 5678 in the Network section
+You can override the default web interface via `N8N_EDITOR_BASE_URL` and `N8N_PATH` to forward to a different port or path.
+
+```yaml
+env_vars_list:
+  - "N8N_EDITOR_BASE_URL: http://YOUR-IP-ADDRESS:5678"
+  - "N8N_PATH: /"
+``` 
 
 ## Workflows and Credentials Migration on First Run
 

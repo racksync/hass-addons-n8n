@@ -43,5 +43,5 @@ options:
 schema:
   timezone: str
   env_vars_list:
-    - "match(^[A-Z_0-9]+: .*$)"
+    - "match(^[A-Z_0-9.]+: .*$)"
   cmd_line_args: "str?" 
