@@ -96,17 +96,23 @@ echo "WEBHOOK_URL: ${WEBHOOK_URL}"
 ###########
 
 # First-run import logic
-IMPORT_MARKER="/media/.n8n_import_done"
+IMPORT_MARKER="/media/n8n_import.json"
 CREDENTIALS_DIR="/config/n8n/credentials/"
 WORKFLOWS_DIR="/config/n8n/workflows/"
 
 if [ ! -f "$IMPORT_MARKER" ]; then
   echo "First run detected: importing credentials and workflows..."
 
+  imported_credentials=()
+  imported_workflows=()
+
   # Import credentials if directory exists and is not empty
   if [ -d "$CREDENTIALS_DIR" ] && [ "$(ls -A "$CREDENTIALS_DIR" 2>/dev/null)" ]; then
     echo "Importing credentials from $CREDENTIALS_DIR"
     n8n import:credentials --separate --input="$CREDENTIALS_DIR"
+    for f in "$CREDENTIALS_DIR"*; do
+      [ -f "$f" ] && imported_credentials+=("$(basename "$f")")
+    done
   else
     echo "No credentials to import from directory."
   fi
@@ -116,6 +122,7 @@ if [ ! -f "$IMPORT_MARKER" ]; then
   if [ -f "$SINGLE_CREDS_FILE" ]; then
     echo "Importing credentials from $SINGLE_CREDS_FILE"
     n8n import:credentials --input="$SINGLE_CREDS_FILE"
+    imported_credentials+=("$(basename "$SINGLE_CREDS_FILE")")
   else
     echo "No single credentials file to import."
   fi
@@ -124,6 +131,9 @@ if [ ! -f "$IMPORT_MARKER" ]; then
   if [ -d "$WORKFLOWS_DIR" ] && [ "$(ls -A "$WORKFLOWS_DIR" 2>/dev/null)" ]; then
     echo "Importing workflows from $WORKFLOWS_DIR"
     n8n import:workflow --separate --input="$WORKFLOWS_DIR"
+    for f in "$WORKFLOWS_DIR"*; do
+      [ -f "$f" ] && imported_workflows+=("$(basename "$f")")
+    done
   else
     echo "No workflows to import from directory."
   fi
@@ -133,11 +143,29 @@ if [ ! -f "$IMPORT_MARKER" ]; then
   if [ -f "$SINGLE_WORKFLOWS_FILE" ]; then
     echo "Importing workflows from $SINGLE_WORKFLOWS_FILE"
     n8n import:workflow --input="$SINGLE_WORKFLOWS_FILE"
+    imported_workflows+=("$(basename "$SINGLE_WORKFLOWS_FILE")")
   else
     echo "No single workflows file to import."
   fi
 
-  touch "$IMPORT_MARKER"
+  # Write import details to marker file in JSON format
+  {
+    echo "{"
+    echo -n "  \"imported_workflows\": ["
+    for i in "${!imported_workflows[@]}"; do
+      printf '\"%s\"' "${imported_workflows[$i]}"
+      [ $i -lt $(( ${#imported_workflows[@]} - 1 )) ] && echo -n ", "
+    done
+    echo "],"
+    echo -n "  \"imported_credentials\": ["
+    for i in "${!imported_credentials[@]}"; do
+      printf '\"%s\"' "${imported_credentials[$i]}"
+      [ $i -lt $(( ${#imported_credentials[@]} - 1 )) ] && echo -n ", "
+    done
+    echo "],"
+    echo "  \"import_date\": \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\""
+    echo "}"
+  } > "$IMPORT_MARKER"
 else
   echo "Imports already performed, skipping."
 fi

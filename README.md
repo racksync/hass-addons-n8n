@@ -122,7 +122,7 @@ Example: `N8N_ENCRYPTION_KEY: YOUR_ENCRYPTION_KEY` add space between the key and
 
 **How it works:**
 - On the first run, the add-on will automatically import all workflows and credentials found in these directories and/or single files if present.
-- This process only happens once, when the add-on is started for the first time (tracked by a marker file at `/media/.n8n_import_done`).
+- This process only happens once, when the add-on is started for the first time (tracked by a marker file at `/media/n8n_import.json`).
 - If you add or change files in these locations after the first run, they will **not** be imported automatically. To re-import, you must delete the marker file or reset the add-on's data.
 
 **Steps:**
